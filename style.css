@@ -4,16 +4,15 @@
   --color3: #393b4b;
   --color4: rgb(18, 19, 19);
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: url(./bg.jpg) center/cover;
-  min-height: 100vh;
+  height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: var(--color1);
   display: flex;
   align-items: center;
@@ -21,41 +20,39 @@ body {
   overflow: hidden;
 }
 .card {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.507);
   width: calc(100% - 50px);
   padding: 20px 20px 6px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-  position: relative;
-  backdrop-filter: blur(5px);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.521);
   border-radius: 5px;
-  z-index: 2;
-  perspective: 40px;
+  backdrop-filter: blur(5px);
 }
 .card:before {
-  content: "\2606";
+  content: "\2730";
   position: absolute;
-  right: 20px;
   top: 14px;
+  right: 20px;
   font-size: 2.4rem;
 }
 h1 {
   margin-bottom: 24px;
   position: relative;
 }
-h1::before {
+h1::after {
   content: "";
+  position: absolute;
   background: var(--color2);
-  bottom: -10px;
   height: 1px;
   width: 100%;
-  transform: scaleX(0);
-  position: absolute;
-  animation: h1anim 10s ease-in-out forwards;
-  transform-origin: center;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  animation: h1anim 6s ease-in-out forwards;
+  transform-origin: centre;
 }
 @keyframes h1anim {
   100% {
-    transform: scaleX(1);
+    transform: translateX(-50%) scaleX(1);
   }
 }
 .grid-container {
@@ -63,53 +60,46 @@ h1::before {
   grid-template-columns: 20% 80%;
 }
 .polygon-container {
-  filter: drop-shadow(-1px 6px 3px var(--color3));
+  filter: drop-shadow(-1px 6px 3px var(--color2));
+  /* Mettre le parent en grid */
   place-self: center left;
 }
-.polygon-container div {
+.polygon {
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-  background-image: linear-gradient(
-    135deg,
-    var(--color2) 0%,
-    var(--color1) 100%
-  );
+  background: linear-gradient(135deg, var(--color2) 0%, var(--color1) 100%);
   height: 100px;
   width: 100px;
-  overflow: hidden;
-  position: relative;
 }
-.polygon-container div:before {
+.polygon:after {
   content: "Un texte";
   position: absolute;
   color: var(--color2);
   background: var(--color4);
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(346deg);
-  padding: 4px;
+  transform: translate(-50%, -50%) rotate(344deg);
   width: 90px;
+  padding: 4px;
   text-align: center;
 }
 p {
   line-height: 26px;
   margin: 20px 0;
   display: -webkit-box;
-  /* can i use */
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   overflow: hidden;
   text-align: justify;
 }
-p::first-letter {
-  font-size: 2rem;
-  display: block;
+p::selection {
+  background: var(--color2);
+  color: var(--color3);
 }
 .checkbox-container {
-  user-select: none;
   display: flex;
   justify-content: space-around;
-  width: 100%;
   margin: 20px 0 30px;
+  perspective: 30px;
 }
 input[type="checkbox"] {
   display: none;
@@ -117,30 +107,31 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked + label {
   background: var(--color2);
   color: var(--color3);
+  transform: scale(1.1);
   filter: brightness(120%);
-  transform: scale(1.05);
 }
 label {
-  transition: 0.2s;
   cursor: pointer;
   border: 1px solid var(--color1);
   background: var(--color3);
   padding: 10px;
   border-radius: 5px;
+  transition: 0.2s;
+  user-select: none;
 }
 label:first-of-type:hover {
-  animation: label1 1s infinite;
+  animation: label1 1s infinite linear;
 }
 @keyframes label1 {
   50% {
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
   100% {
     transform: scale(1);
   }
 }
 label:nth-child(4):hover {
-  animation: label2 3s infinite;
+  animation: label2 3s infinite linear;
 }
 /* Ne pas oublier perspective sur le parent */
 @keyframes label2 {
@@ -161,54 +152,54 @@ label:nth-child(4):hover {
 .e-mail input {
   padding: 10px;
   border-radius: 5px;
-  border: 3px solid transparent;
   outline: none;
+  border: 3px solid transparent;
   transition: 0.3s;
   text-align: center;
   font-size: 1.1rem;
+  color: var(--color1);
+  min-width: 180px;
   width: 35%;
   max-width: 300px;
-  min-width: 150px;
-  color: var(--color1);
 }
-.e-mail input:focus {
-  border: 3px solid var(--color2);
+input[type="text"]:focus {
   background: transparent;
+  border: 3px solid var(--color2);
   border-radius: 150px;
 }
-.e-mail input::placeholder {
+input[type="text"]::placeholder {
   color: var(--color2);
-  text-align: center;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 button {
+  cursor: pointer;
   background: var(--color2);
   border: none;
-  outline: none;
   font-size: 1.3rem;
   padding: 10px 20px;
-  border-radius: 100px;
-  display: block;
+  border-radius: 150px;
   margin: 0 auto;
-  cursor: pointer;
-  transition: 0.2s;
+  display: block;
+  transition: 0.1s;
 }
 button:hover {
   letter-spacing: 3px;
 }
+button:active {
+  transform: scale(1.2);
+}
 button:hover + a,
 a:hover {
   opacity: 1;
+  visibility: visible;
   transform: translateY(0);
-}
-button:active {
-  transform: scale(1.2);
 }
 a {
   color: var(--color2);
   text-align: center;
   display: block;
   opacity: 0;
+  visibility: hidden;
   transform: translateY(20px);
   transition: 0.3s;
 }
@@ -218,8 +209,8 @@ a:visited {
 img {
   height: 40px;
   position: absolute;
-  z-index: 1;
-  filter: drop-shadow(-1px 6px 3px rgba(255, 255, 0, 0.678));
+  filter: drop-shadow(0px 6px 3px rgba(255, 255, 0, 0.6));
+  z-index: -1;
   animation: spaceship 60s infinite linear;
 }
 @keyframes spaceship {
@@ -231,12 +222,12 @@ img {
   10% {
     top: 6%;
     left: 30%;
-    transform: rotate(90deg);
+    transform: rotate(95deg);
   }
   20% {
     top: 9%;
     left: 60%;
-    transform: rotate(90deg);
+    transform: rotate(60deg);
   }
   30% {
     top: 0%;
@@ -259,12 +250,12 @@ img {
     transform: rotate(256deg);
   }
   70% {
-    top: 102%;
+    top: 110%;
     left: 50%;
     transform: rotate(237deg);
   }
   80% {
-    top: 87%;
+    top: 85%;
     left: 30%;
     transform: rotate(323deg);
   }
