@@ -1,0 +1,281 @@
+:root {
+  --color1: #ede4d0;
+  --color2: pink;
+  --color3: #393b4b;
+  --color4: rgb(18, 19, 19);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: url(./bg.jpg) center/cover;
+  min-height: 100vh;
+  color: var(--color1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.card {
+  background: rgba(0, 0, 0, 0.5);
+  width: calc(100% - 50px);
+  padding: 20px 20px 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  position: relative;
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
+  z-index: 2;
+  perspective: 40px;
+}
+.card:before {
+  content: "\2606";
+  position: absolute;
+  right: 20px;
+  top: 14px;
+  font-size: 2.4rem;
+}
+h1 {
+  margin-bottom: 24px;
+  position: relative;
+}
+h1::before {
+  content: "";
+  background: var(--color2);
+  bottom: -10px;
+  height: 1px;
+  width: 100%;
+  transform: scaleX(0);
+  position: absolute;
+  animation: h1anim 10s ease-in-out forwards;
+  transform-origin: center;
+}
+@keyframes h1anim {
+  100% {
+    transform: scaleX(1);
+  }
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+.polygon-container {
+  filter: drop-shadow(-1px 6px 3px var(--color3));
+  place-self: center left;
+}
+.polygon-container div {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  background-image: linear-gradient(
+    135deg,
+    var(--color2) 0%,
+    var(--color1) 100%
+  );
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+  position: relative;
+}
+.polygon-container div:before {
+  content: "Un texte";
+  position: absolute;
+  color: var(--color2);
+  background: var(--color4);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(346deg);
+  padding: 4px;
+  width: 90px;
+  text-align: center;
+}
+p {
+  line-height: 26px;
+  margin: 20px 0;
+  display: -webkit-box;
+  /* can i use */
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  text-align: justify;
+}
+p::first-letter {
+  font-size: 2rem;
+  display: block;
+}
+.checkbox-container {
+  user-select: none;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 20px 0 30px;
+}
+input[type="checkbox"] {
+  display: none;
+}
+input[type="checkbox"]:checked + label {
+  background: var(--color2);
+  color: var(--color3);
+  filter: brightness(120%);
+  transform: scale(1.05);
+}
+label {
+  transition: 0.2s;
+  cursor: pointer;
+  border: 1px solid var(--color1);
+  background: var(--color3);
+  padding: 10px;
+  border-radius: 5px;
+}
+label:first-of-type:hover {
+  animation: label1 1s infinite;
+}
+@keyframes label1 {
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+label:nth-child(4):hover {
+  animation: label2 3s infinite;
+}
+/* Ne pas oublier perspective sur le parent */
+@keyframes label2 {
+  33% {
+    transform: translateZ(30px);
+  }
+  66% {
+    transform: translateZ(-40px);
+  }
+  100% {
+    transform: translateZ(0);
+  }
+}
+.e-mail {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.e-mail input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 3px solid transparent;
+  outline: none;
+  transition: 0.3s;
+  text-align: center;
+  font-size: 1.1rem;
+  width: 35%;
+  max-width: 300px;
+  min-width: 150px;
+  color: var(--color1);
+}
+.e-mail input:focus {
+  border: 3px solid var(--color2);
+  background: transparent;
+  border-radius: 150px;
+}
+.e-mail input::placeholder {
+  color: var(--color2);
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+button {
+  background: var(--color2);
+  border: none;
+  outline: none;
+  font-size: 1.3rem;
+  padding: 10px 20px;
+  border-radius: 100px;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover {
+  letter-spacing: 3px;
+}
+button:hover + a,
+a:hover {
+  opacity: 1;
+  transform: translateY(0);
+}
+button:active {
+  transform: scale(1.2);
+}
+a {
+  color: var(--color2);
+  text-align: center;
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 0.3s;
+}
+a:visited {
+  color: var(--color1);
+}
+img {
+  height: 40px;
+  position: absolute;
+  z-index: 1;
+  filter: drop-shadow(-1px 6px 3px rgba(255, 255, 0, 0.678));
+  animation: spaceship 60s infinite linear;
+}
+@keyframes spaceship {
+  0% {
+    top: 2%;
+    left: 2%;
+    transform: rotate(90deg);
+  }
+  10% {
+    top: 6%;
+    left: 30%;
+    transform: rotate(90deg);
+  }
+  20% {
+    top: 9%;
+    left: 60%;
+    transform: rotate(90deg);
+  }
+  30% {
+    top: 0%;
+    left: 80%;
+    transform: rotate(90deg);
+  }
+  40% {
+    top: 20%;
+    left: 120%;
+    transform: rotate(110deg);
+  }
+  50% {
+    top: 50%;
+    left: 80%;
+    transform: rotate(323deg);
+  }
+  60% {
+    top: 90%;
+    left: 90%;
+    transform: rotate(256deg);
+  }
+  70% {
+    top: 102%;
+    left: 50%;
+    transform: rotate(237deg);
+  }
+  80% {
+    top: 87%;
+    left: 30%;
+    transform: rotate(323deg);
+  }
+  90% {
+    top: 50%;
+    left: 15%;
+    transform: rotate(350deg);
+  }
+  100% {
+    top: 2%;
+    left: 2%;
+    transform: rotate(90deg);
+  }
+}
